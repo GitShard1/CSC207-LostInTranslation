@@ -41,7 +41,25 @@ public class CountryCodeConverter {
             while (iterator.hasNext()) {
                 String line = iterator.next();
                 String[] parts = line.split("\t");
-                // TODO Task B: use parts to populate the instance variables
+                // TODO (DONE) Task B: use parts to populate the instance variables
+                for (int i = 0; i < parts.length; i+=4) {
+                    String countryName = parts[i];
+                    //int countryCode = Integer.parseInt(parts[i+3]);
+                    String countryCode = parts[i+2];
+                    countryCode = countryCode.toLowerCase();
+                    System.out.println(countryName);
+                    System.out.println(countryCode);
+
+                    countryToCountryCode.put(countryName, countryCode);
+                    countryCodeToCountry.put(countryCode, countryName);
+
+                    //String[] lineContent = lineTxt.split(" ");
+                    //System.out.println(lineContent[0]);
+                    //String countryName = lineContent[0];
+                    //String countryCode = lineContent[1];
+                    //countryToCountryCode.put(countryName, countryCode);
+                }
+
             }
         }
         catch (IOException | URISyntaxException ex) {
@@ -56,8 +74,8 @@ public class CountryCodeConverter {
      * @return the name of the country corresponding to the code
      */
     public String fromCountryCode(String code) {
-        // TODO Task B: update this code to use an instance variable to return the correct value
-        return code;
+        // TODO (DONE) Task B: update this code to use an instance variable to return the correct value
+        return countryCodeToCountry.get(code);
     }
 
     /**
@@ -66,8 +84,8 @@ public class CountryCodeConverter {
      * @return the 3-letter code of the country
      */
     public String fromCountry(String country) {
-        // TODO Task B: update this code to use an instance variable to return the correct value
-        return country;
+        // TODO (DONE) Task B: update this code to use an instance variable to return the correct value
+        return countryToCountryCode.get(country);
     }
 
     /**
@@ -76,6 +94,6 @@ public class CountryCodeConverter {
      */
     public int getNumCountries() {
         // TODO Task B: update this code to use an instance variable to return the correct value
-        return 0;
+        return countryToCountryCode.size();
     }
 }
